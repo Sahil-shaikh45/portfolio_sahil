@@ -5,6 +5,32 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <!-- Runtime Error Diagnostics -->
+    <script type="text/javascript">
+      window.onerror = function(message, source, lineno, colno, error) {
+        var div = document.createElement('div');
+        div.style.padding = '20px';
+        div.style.background = '#ef4444';
+        div.style.color = 'white';
+        div.style.position = 'fixed';
+        div.style.top = '0';
+        div.style.left = '0';
+        div.style.width = '100%';
+        div.style.zIndex = '999999';
+        div.style.fontSize = '14px';
+        div.style.fontFamily = 'monospace';
+        div.style.boxShadow = '0 10px 15px -3px rgba(0,0,0,0.3)';
+        div.style.overflow = 'auto';
+        div.style.maxHeight = '50vh';
+        div.innerHTML = '<strong>Deployment Diagnostics - JavaScript Error:</strong><br>' + 
+                        message + '<br><br>' +
+                        '<strong>Source:</strong> ' + source + ' (line ' + lineno + ', col ' + colno + ')<br>' +
+                        '<strong>Stack Trace:</strong><br><pre style="white-space: pre-wrap; margin-top: 5px;">' + (error ? error.stack : 'N/A') + '</pre>';
+        document.body.appendChild(div);
+        return false;
+      };
+    </script>
+    
     <!-- Primary SEO Meta Tags -->
     <title>Sahil Shaikh | Java Full Stack Developer</title>
     <meta name="title" content="Sahil Shaikh | Java Full Stack Developer" />
