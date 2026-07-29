@@ -30,26 +30,29 @@ export default function CanvasBackground({ isDarkMode }) {
     // This allows the canvas to remain 'pointer-events-none' (so elements on the page can be clicked)
     // while still capturing user movements for the fluid simulation.
     const forwardEvent = (e, eventType, clientX, clientY) => {
-      // Use native MouseEvent initialization. The browser automatically calculates 
-      // offsetX and offsetY relative to the target element based on clientX and clientY.
+      // Use native MouseEvent initialization. Set bubbles: false to prevent 
+      // the event from bubbling up to the window and re-triggering our listener.
       const fakeEvent = new MouseEvent(eventType, {
         clientX,
         clientY,
-        bubbles: true
+        bubbles: false
       });
 
       canvas.dispatchEvent(fakeEvent);
     };
 
     const handleMouseMove = (e) => {
+      if (!e.isTrusted) return; // Ignore programmatically dispatched events
       forwardEvent(e, 'mousemove', e.clientX, e.clientY);
     };
 
     const handleMouseDown = (e) => {
+      if (!e.isTrusted) return; // Ignore programmatically dispatched events
       forwardEvent(e, 'mousedown', e.clientX, e.clientY);
     };
 
     const handleTouchStart = (e) => {
+      if (!e.isTrusted) return; // Ignore programmatically dispatched events
       if (e.touches.length > 0) {
         const touch = e.touches[0];
         forwardEvent(e, 'mousedown', touch.clientX, touch.clientY);
@@ -57,6 +60,7 @@ export default function CanvasBackground({ isDarkMode }) {
     };
 
     const handleTouchMove = (e) => {
+      if (!e.isTrusted) return; // Ignore programmatically dispatched events
       if (e.touches.length > 0) {
         const touch = e.touches[0];
         forwardEvent(e, 'mousemove', touch.clientX, touch.clientY);
