@@ -76,7 +76,7 @@ export default function About() {
 
             <div className="pt-4">
               <a
-                href="/resume.pdf"
+                href={`${import.meta.env.BASE_URL}resume.pdf`}
                 download="Sahil_Shaikh_Resume.pdf"
                 className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-xl bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white font-medium transition-all duration-200 border border-slate-700 hover:border-slate-600 shadow-md group"
               >
