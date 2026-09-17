@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { Award, ShieldCheck, BookOpen, Calendar } from 'lucide-react';
+import Card3DTilt from './Card3DTilt';
+import Card3DScroll from './Card3DScroll';
 
 export default function Achievements() {
   const items = [
@@ -42,7 +44,7 @@ export default function Achievements() {
   ];
 
   return (
-    <section id="achievements" className="py-24 relative overflow-hidden bg-slate-100/50 dark:bg-slate-950/20">
+    <section id="achievements" className="py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Heading */}
@@ -52,79 +54,82 @@ export default function Achievements() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
-            className="font-display font-bold text-3xl sm:text-4xl tracking-tight"
+            className="font-display font-bold text-3xl sm:text-5xl tracking-tight"
           >
-            Achievements & <span className="text-accent-teal dark:text-accent-glowTeal">Timeline</span>
+            Achievements & <span className="text-accent-teal dark:text-accent-glowTeal glow-text-teal">Timeline</span>
           </motion.h2>
           <motion.div
             initial={{ width: 0 }}
-            whileInView={{ width: 60 }}
+            whileInView={{ width: 80 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="h-1 bg-accent-teal mx-auto mt-4 rounded-full"
+            className="h-1 bg-gradient-to-r from-accent-teal to-blue-500 mx-auto mt-4 rounded-full shadow-md"
           />
         </div>
 
-        {/* Timeline Container */}
-        <div className="relative max-w-3xl mx-auto">
-          {/* Vertical line track */}
-          <div className="absolute left-4 md:left-1/2 top-2 bottom-2 w-0.5 bg-slate-200 dark:bg-slate-800 -translate-x-1/2" />
+        {/* 3D Timeline Container */}
+        <div className="relative max-w-4xl mx-auto">
+          {/* Vertical line track with glowing gradient */}
+          <div className="absolute left-4 md:left-1/2 top-2 bottom-2 w-1 bg-gradient-to-b from-accent-teal via-blue-500 to-accent-teal/30 -translate-x-1/2 rounded-full shadow-sm" />
 
           {/* Timeline Nodes */}
           <div className="space-y-12">
             {items.map((item, idx) => {
               const isEven = idx % 2 === 0;
               return (
-                <motion.div
-                  key={item.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.7, delay: idx * 0.1 }}
-                  className={`relative flex flex-col md:flex-row items-stretch ${
-                    isEven ? 'md:flex-row-reverse' : ''
-                  }`}
-                >
-                  {/* Timeline icon node */}
-                  <div className="absolute left-4 md:left-1/2 top-4 w-9 h-9 rounded-full bg-slate-950 border-2 border-accent-teal dark:border-accent-glowTeal text-accent-teal dark:text-accent-glowTeal flex items-center justify-center -translate-x-1/2 z-20 shadow-md">
-                    {item.icon}
-                  </div>
-
-                  {/* Spacer Column for desktop spacing */}
-                  <div className="hidden md:block w-1/2" />
-
-                  {/* Card Content Column */}
-                  <div className="w-full md:w-1/2 pl-12 md:pl-0 md:px-8">
-                    <div className="p-6 rounded-2xl glass-panel border border-slate-200/50 dark:border-slate-800/40 hover:border-accent-teal/40 dark:hover:border-accent-teal/30 hover:shadow-lg transition-all duration-300 relative group">
-                      
-                      {/* Decorative small node indicator for desktop */}
-                      <div className={`hidden md:block absolute top-6 w-3 h-3 rotate-45 border border-slate-200/50 dark:border-slate-800/40 bg-white dark:bg-slate-900 border-t-0 border-r-0 ${
-                        isEven ? '-right-1.5 border-t border-r border-b-0 border-l-0' : '-left-1.5'
-                      }`} />
-
-                      {/* Date Header */}
-                      <div className="flex items-center space-x-2 text-slate-400 dark:text-slate-500 mb-2">
-                        <Calendar className="w-4 h-4 text-accent-teal dark:text-accent-glowTeal" />
-                        <span className="font-mono text-xs font-semibold uppercase tracking-wider">{item.date}</span>
-                      </div>
-
-                      {/* Title */}
-                      <h3 className="font-display font-bold text-lg text-slate-800 dark:text-white mb-1 group-hover:text-accent-teal dark:group-hover:text-accent-glowTeal transition-colors duration-200">
-                        {item.title}
-                      </h3>
-
-                      {/* Organization */}
-                      <p className="font-display font-semibold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-4">
-                        {item.organization}
-                      </p>
-
-                      {/* Description */}
-                      <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                        {item.desc}
-                      </p>
+                <Card3DScroll key={item.id} rotateXAmount={14} translateZAmount={40}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.7, delay: idx * 0.1 }}
+                    className={`relative flex flex-col md:flex-row items-stretch ${
+                      isEven ? 'md:flex-row-reverse' : ''
+                    }`}
+                  >
+                    {/* Glowing 3D Timeline Icon Node */}
+                    <div className="absolute left-4 md:left-1/2 top-6 w-11 h-11 rounded-full bg-slate-900 border-2 border-accent-teal dark:border-accent-glowTeal text-accent-teal dark:text-accent-glowTeal flex items-center justify-center -translate-x-1/2 z-20 shadow-xl shadow-accent-teal/20">
+                      {item.icon}
                     </div>
-                  </div>
-                </motion.div>
+
+                    {/* Spacer Column for desktop spacing */}
+                    <div className="hidden md:block w-1/2" />
+
+                    {/* Card Content Column */}
+                    <div className="w-full md:w-1/2 pl-14 md:pl-0 md:px-8">
+                      <Card3DTilt maxTilt={10} scale={1.02}>
+                        <div className="p-7 rounded-3xl glass-panel-3d border border-slate-200/60 dark:border-slate-800/60 hover:border-accent-teal/50 dark:hover:border-accent-teal/40 transition-all duration-300 relative group">
+                          
+                          {/* Date & Type Tag Header */}
+                          <div className="flex items-center justify-between mb-3">
+                            <div className="flex items-center space-x-2 text-slate-500 dark:text-slate-400">
+                              <Calendar className="w-4 h-4 text-accent-teal dark:text-accent-glowTeal" />
+                              <span className="font-mono text-xs font-bold uppercase tracking-wider">{item.date}</span>
+                            </div>
+                            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-accent-teal/10 text-accent-teal dark:text-accent-glowTeal">
+                              {item.type}
+                            </span>
+                          </div>
+
+                          {/* Title */}
+                          <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white mb-1 group-hover:text-accent-teal dark:group-hover:text-accent-glowTeal transition-colors duration-200">
+                            {item.title}
+                          </h3>
+
+                          {/* Organization */}
+                          <p className="font-mono font-semibold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-4">
+                            {item.organization}
+                          </p>
+
+                          {/* Description */}
+                          <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-normal">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </Card3DTilt>
+                    </div>
+                  </motion.div>
+                </Card3DScroll>
               );
             })}
           </div>

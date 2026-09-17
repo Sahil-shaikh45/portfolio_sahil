@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import CanvasBackground from './components/CanvasBackground';
+import Background3DCanvas from './components/Background3DCanvas';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -8,6 +8,7 @@ import Projects from './components/Projects';
 import Achievements from './components/Achievements';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Scroll3DPresenter from './components/Scroll3DPresenter';
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -67,8 +68,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen relative text-slate-900 dark:text-slate-100 transition-colors duration-300">
-      {/* Interactive Background */}
-      <CanvasBackground isDarkMode={isDarkMode} />
+      {/* 3D Interactive Background */}
+      <Background3DCanvas isDarkMode={isDarkMode} />
 
       {/* Header / Navbar */}
       <Navbar 
@@ -98,8 +99,12 @@ export default function App() {
         <Contact />
       </main>
 
+      {/* Floating 3D Character Companion on Scroll */}
+      <Scroll3DPresenter activeSection={activeSection} />
+
       {/* Footer */}
       <Footer />
     </div>
   );
 }
+

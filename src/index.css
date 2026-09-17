@@ -114,13 +114,18 @@
   background: rgba(20, 184, 166, 0.6); /* Teal hover */
 }
 
-/* Glassmorphism Classes */
+/* Glassmorphism & 3D Depth Classes */
 .glass-panel {
   @apply backdrop-blur-md bg-white/70 border border-slate-200/50 shadow-sm;
 }
 
 .dark .glass-panel {
   @apply backdrop-blur-md bg-slate-900/60 border border-slate-800/40 shadow-xl shadow-black/10;
+}
+
+.glass-panel-3d {
+  @apply backdrop-blur-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200/60 dark:border-slate-800/60 shadow-2xl shadow-accent-teal/5 dark:shadow-teal-950/20;
+  transform-style: preserve-3d;
 }
 
 .glass-navbar {
@@ -131,21 +136,77 @@
   @apply backdrop-blur-lg bg-slate-950/80 border-b border-slate-800/40;
 }
 
-/* Custom Text Glow Effects */
+/* 3D Perspective & Depth Helpers */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.translate-z-10 {
+  transform: translateZ(10px);
+}
+
+.translate-z-20 {
+  transform: translateZ(20px);
+}
+
+.translate-z-30 {
+  transform: translateZ(30px);
+}
+
+.translate-z-50 {
+  transform: translateZ(50px);
+}
+
+/* Custom 3D Text & Neon Glow Effects */
 .glow-text-teal {
-  text-shadow: 0 0 10px rgba(20, 184, 166, 0.2);
+  text-shadow: 0 0 12px rgba(20, 184, 166, 0.3), 0 0 24px rgba(20, 184, 166, 0.15);
 }
 
 .dark .glow-text-teal {
-  text-shadow: 0 0 15px rgba(45, 212, 191, 0.4);
+  text-shadow: 0 0 15px rgba(45, 212, 191, 0.5), 0 0 35px rgba(45, 212, 191, 0.25);
 }
 
 .glow-text-gold {
-  text-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+  text-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
 }
 
 .dark .glow-text-gold {
-  text-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+  text-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
+}
+
+.glow-box-teal {
+  box-shadow: 0 0 25px -5px rgba(20, 184, 166, 0.25);
+}
+
+.dark .glow-box-teal {
+  box-shadow: 0 0 35px -5px rgba(45, 212, 191, 0.35);
+}
+
+/* Orbiting Animation */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(3deg); }
+}
+
+@keyframes float-reverse {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(12px) rotate(-3deg); }
+}
+
+.animate-float-slow {
+  animation: float-slow 5s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 6s ease-in-out infinite;
 }
 
 /* Typing cursor blink */
@@ -158,3 +219,4 @@
   animation: blink 1s step-start infinite;
   @apply font-bold ml-1 text-accent-lightTeal dark:text-accent-glowTeal;
 }
+
